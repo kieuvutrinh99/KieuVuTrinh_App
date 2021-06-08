@@ -109,7 +109,15 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                showDialog("Game Over");
+                showDialog("Game over\nĐiểm của bạn là "+(currentQuestion-1));
+            }
+        },1000);
+    }
+    private void HoanThanhGame(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showDialog("CONGRATULATIONS\nBạn đã hoàn thành bộ câu hỏi\nĐiểm của bạn là "+currentQuestion);
             }
         },1000);
     }
@@ -133,17 +141,15 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     }
 
     private void nextQuestion(){
-        if (i < 4) { // i < max cau hoi thi no nhay tiep , luc nao them du 50 cau hoi thi i < 49
+        if (i < 9 ) { // i < max cau hoi thi no nhay tiep , luc nao them du 50 cau hoi thi i < 49
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-
                     getDataAnswer();
                 }
             }, 1000);
         }else{
-            Toast.makeText(Giaodien_QuestionActivity.this,"Bạn đã hoàn thành bộ câu hỏi",Toast.LENGTH_SHORT).show();
-            finish();
+            HoanThanhGame();
         }
     }
     private void Init() {

@@ -44,13 +44,24 @@
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
             />
+        <EditText
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:id="@+id/et_Nhaplai_matkhauRegistry"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/et_matkhauRegistry"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Nhập lại mật khẩu"
+            />
 
         <Button
             android:layout_marginLeft="40dp"
             android:id="@+id/btn_regisDangky"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_matkhauRegistry"
+            android:layout_below="@+id/et_Nhaplai_matkhauRegistry"
             android:layout_marginTop="30dp"
             android:backgroundTint="#EC0F0F"
             android:layout_alignParentLeft="true"
@@ -61,7 +72,7 @@
             android:id="@+id/btn_regiscancer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_matkhauRegistry"
+            android:layout_below="@+id/et_Nhaplai_matkhauRegistry"
             android:layout_marginTop="30dp"
             android:backgroundTint="#EC0F0F"
             android:layout_alignParentRight="true"

@@ -16,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistryActivity extends AppCompatActivity {
-    private EditText etUserRegis,etPasswordRegis;
+    private EditText etUserRegis,etPasswordRegis,et_Enter_PasswordRegis;
     private Button btnDangkyRegis,btn_CancelRegis;
     protected FirebaseAuth authRegis;
     @Override
@@ -30,6 +30,8 @@ public class RegistryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String u = etUserRegis.getText().toString();
                 String p = etPasswordRegis.getText().toString();
+                String t = et_Enter_PasswordRegis.getText().toString();
+
                 if(u.isEmpty()){
                     etUserRegis.setError("Tên đăng nhập không được để trống");
                     return;
@@ -40,6 +42,10 @@ public class RegistryActivity extends AppCompatActivity {
                 }
                 if(p.length()<6){
                     etPasswordRegis.setError("Độ dài mật khẩu phải lớn hơn 6");
+                    return;
+                }
+                if(t.equals(p)!=true){
+                    et_Enter_PasswordRegis.setError("Mật khẩu không khớp");
                     return;
                 }
                 authRegis.createUserWithEmailAndPassword(u,p).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -66,6 +72,7 @@ public class RegistryActivity extends AppCompatActivity {
     private void Init() {
         etUserRegis = findViewById(R.id.et_tendangnhapRegistry);
         etPasswordRegis = findViewById(R.id.et_matkhauRegistry);
+        et_Enter_PasswordRegis = findViewById(R.id.et_Nhaplai_matkhauRegistry);
         btnDangkyRegis = findViewById(R.id.btn_regisDangky);
         btn_CancelRegis = findViewById(R.id.btn_regiscancer);
     }
