@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/phongnen"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GAME TRẮC NGHIỆM"
+        android:textSize="30dp"
+        android:typeface="serif"
+        android:textStyle="italic|bold"
+        />
+    <TextView
+        android:id="@+id/tv_hightscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Điểm cao"/>
+    <Button
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/btn_lichsu"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="LỊCH SỬ"
+        android:background="@drawable/shape"
+        />
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:id="@+id/btn_vanhoa"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="VĂN HÓA"/>
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:id="@+id/btn_dichbenh"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="DỊCH BỆNH"/>
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/phongnen"
+    tools:context=".RegistryActivity">
+    <RelativeLayout
+        android:background="#786E6E"
+        android:layout_marginTop="200dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FORM ĐĂNG KÍ"
+            android:textSize="20dp"
+            android:textColor="@color/white"/>
+        <EditText
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/et_tendangnhapRegistry"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Tên đăng nhập"
+            android:textColorHint="@color/black"
+            />
+        <EditText
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:id="@+id/et_matkhauRegistry"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/et_tendangnhapRegistry"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu"
+            android:textColorHint="@color/black"
+            />
+
+        <Button
+            android:layout_marginLeft="40dp"
+            android:id="@+id/btn_regisDangky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_matkhauRegistry"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#EC0F0F"
+            android:layout_alignParentLeft="true"
+            android:text="Đăng ký"
+            android:textColor="@color/white"/>
+        <Button
+            android:layout_marginRight="40dp"
+            android:id="@+id/btn_regiscancer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_matkhauRegistry"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#EC0F0F"
+            android:layout_alignParentRight="true"
+            android:text="Cancer"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
