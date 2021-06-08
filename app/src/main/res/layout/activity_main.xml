@@ -16,6 +16,7 @@
         android:textSize="30dp"
         android:typeface="serif"
         android:textStyle="italic|bold"
+        android:textColor="#E11111"
         />
     <Button
         android:layout_marginTop="100dp"

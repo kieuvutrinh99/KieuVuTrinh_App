@@ -17,13 +17,8 @@
         android:textSize="30dp"
         android:typeface="serif"
         android:textStyle="italic|bold"
+        android:textColor="#E11111"
         />
-    <TextView
-        android:id="@+id/tv_hightscore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Điểm cao"/>
     <Button
         android:layout_marginTop="100dp"
         android:layout_gravity="center"

@@ -32,7 +32,6 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="Tên đăng nhập"
-            android:textColorHint="@color/black"
             />
         <EditText
             android:textColor="@color/black"
@@ -44,7 +43,6 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
-            android:textColorHint="@color/black"
             android:password="true"
             />
 

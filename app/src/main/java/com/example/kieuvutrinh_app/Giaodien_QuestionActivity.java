@@ -1,7 +1,10 @@
 package com.example.kieuvutrinh_app;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Giaodien_QuestionActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView tv_score_question;
     private TextView tv_content_question;
     private TextView tv_question;
     private TextView tv_question_one;
@@ -26,6 +30,7 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     private TextView tv_question_three;
     private TextView tv_question_four;
     private String category;
+    private int currentQuestion = 0;
     List<Answer> listAnswer ;
     private int i = -1;
     List<Question> listQuestion = null;
@@ -48,54 +53,97 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_question_one:
-                if (listAnswer.get(0).getKiemtra().equals("true")){
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon dung",Toast.LENGTH_SHORT).show();
-                    nextQuestion();
-                    // m lam them 1 caci màù nuwaxx, chon sai background đáp án thành màu đỏ,ok
-                }else{
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon sai",Toast.LENGTH_SHORT).show();
-                }
+                tv_question_one.setBackgroundResource(R.drawable.bg_orange_corner_30);
+                getBackgroundAnswer(tv_question_one,0);
                 break;
             case R.id.tv_question_two:
-                if (listAnswer.get(1).getKiemtra().equals("true")){
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon dung",Toast.LENGTH_SHORT).show();
-                    nextQuestion();
-                }else{
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon sai",Toast.LENGTH_SHORT).show();
-
-                }
+                tv_question_two.setBackgroundResource(R.drawable.bg_orange_corner_30);
+                getBackgroundAnswer(tv_question_two,1);
                 break;
             case R.id.tv_question_three:
-                if (listAnswer.get(2).getKiemtra().equals("true")){
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon dung",Toast.LENGTH_SHORT).show();
-                    nextQuestion();
-                }else{
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon sai",Toast.LENGTH_SHORT).show();
-
-                }
+                tv_question_three.setBackgroundResource(R.drawable.bg_orange_corner_30);
+                getBackgroundAnswer(tv_question_three,2);
                 break;
             case R.id.tv_question_four:
-                if (listAnswer.get(3).getKiemtra().equals("true")){
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon dung",Toast.LENGTH_SHORT).show();
-                    nextQuestion();
-
-                }else{
-                    Toast.makeText(Giaodien_QuestionActivity.this,"ban chon sai",Toast.LENGTH_SHORT).show();
-                }
+                tv_question_four.setBackgroundResource(R.drawable.bg_orange_corner_30);
+                getBackgroundAnswer(tv_question_four,3);
                 break;
 
         }
     }
+
+    private void getBackgroundAnswer(TextView textView,int index) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //textView.setBackgroundResource(R.drawable.bg_orange_corner_30);
+                if(listAnswer.get(index).getKiemtra().equals("true")){
+                    textView.setBackgroundResource(R.drawable.bg_green_corner_30);
+                    nextQuestion();
+                }
+                else{
+                    textView.setBackgroundResource(R.drawable.bg_red_corner_30);
+                    showAnswerCorrect();
+                    gameOver();
+                }
+            }
+        },1000);
+    }
+
+    private void showAnswerCorrect() {
+        if(listAnswer.get(0).getKiemtra().equals("true")){
+            tv_question_one.setBackgroundResource(R.drawable.bg_green_corner_30);
+        }
+        if(listAnswer.get(1).getKiemtra().equals("true")){
+            tv_question_two.setBackgroundResource(R.drawable.bg_green_corner_30);
+        }
+        if(listAnswer.get(2).getKiemtra().equals("true")){
+            tv_question_three.setBackgroundResource(R.drawable.bg_green_corner_30);
+        }
+        if(listAnswer.get(3).getKiemtra().equals("true")){
+            tv_question_four.setBackgroundResource(R.drawable.bg_green_corner_30);
+        }
+    }
+
+    private void gameOver() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showDialog("Game Over");
+            }
+        },1000);
+    }
+
+    private void showDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Giaodien_QuestionActivity.this,GiaodienGame_Activity.class);
+                dialog.dismiss();
+                startActivity(intent);
+            }
+
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     private void nextQuestion(){
-        if (i < 1) { // i < max cau hoi thi no nhay tiep , luc nao them du 50 cau hoi thi i < 49
+        if (i < 4) { // i < max cau hoi thi no nhay tiep , luc nao them du 50 cau hoi thi i < 49
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
                     getDataAnswer();
                 }
-            }, 2000);
+            }, 1000);
         }else{
             Toast.makeText(Giaodien_QuestionActivity.this,"Bạn đã hoàn thành bộ câu hỏi",Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
     private void Init() {
@@ -105,6 +153,7 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         tv_question_two = findViewById(R.id.tv_question_two);
         tv_question_three = findViewById(R.id.tv_question_three);
         tv_question_four = findViewById(R.id.tv_question_four);
+        tv_score_question = findViewById(R.id.tv_score_question);
     }
 
     private void getDataListQuestion() {
@@ -129,9 +178,16 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     }
 
     private void getDataAnswer(){
+        currentQuestion++;
+        tv_question.setText("Question "+currentQuestion);
+        tv_score_question.setText("Score: "+(currentQuestion-1));
         i++;
+        tv_question_one.setBackgroundResource(R.drawable.bg_blue_corner_30);
+        tv_question_two.setBackgroundResource(R.drawable.bg_blue_corner_30);
+        tv_question_three.setBackgroundResource(R.drawable.bg_blue_corner_30);
+        tv_question_four.setBackgroundResource(R.drawable.bg_blue_corner_30);
         tv_content_question.setText(listQuestion.get(i).getText_question());
-        System.out.println(listQuestion.size());
+        //System.out.println(listQuestion.size());
         Call<List<Answer>> callback = dataservice.GetDataAnswer(listQuestion.get(i).getId_answer());
         callback.enqueue(new Callback<List<Answer>>() {
             @Override
