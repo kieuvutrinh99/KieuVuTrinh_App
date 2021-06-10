@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(),"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("username_user",u);
                             startActivity(intent);
                         }
                         else
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private void Init() {
         btn_Dangnhap = findViewById(R.id.btn_Dangnhap);
         btn_Dangki = findViewById(R.id.btn_dangki);

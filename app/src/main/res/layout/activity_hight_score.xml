@@ -17,11 +17,25 @@
             android:text="Bảng xếp hạng điểm cao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="50dp"
-            android:id="@+id/rcv_bangHighScore"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_below="@+id/tv_diemcao"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="50dp"
+                android:id="@+id/rcv_bangHighScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <Button
+                android:id="@+id/btn_quaylai"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#009688"
+                android:text="Quay lại"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </RelativeLayout>

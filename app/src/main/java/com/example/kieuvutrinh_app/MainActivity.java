@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_StartGame;
     private Button btn_HelpGame;
     private Button btn_HighScore;
+    private String username_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_StartGame.setOnClickListener(this);
         btn_HighScore.setOnClickListener(this);
         btn_HelpGame.setOnClickListener(this);
+
+        Intent i = getIntent();
+        username_user = i.getStringExtra("username_user");
+//        Intent intent = new Intent(this,Giaodien_QuestionActivity.class);
+//        intent.putExtra("username_user",username_user);
+//        startActivity(intent);
+        //Toast.makeText(this,username_user,Toast.LENGTH_SHORT).show();
     }
 
     private void Init() {
@@ -33,9 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.btn_batdau:
                 Intent intent = new Intent(MainActivity.this,GiaodienGame_Activity.class);
+                intent.putExtra("username_user",username_user);
                 startActivity(intent);
                 break;
             case R.id.btn_huongdan:
+                Intent intent3 = new Intent(MainActivity.this, HelpGameActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.btn_diemcao:
                 Intent intent2 = new Intent(MainActivity.this, HightScoreActivity.class);
