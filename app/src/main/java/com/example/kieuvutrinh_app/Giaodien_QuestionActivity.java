@@ -100,16 +100,16 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         },1000);
     }
 
-    private void sendScoreUser() {
-        Intent i2 = getIntent();
-        String username_user = i2.getStringExtra("username_user");
-        String checkStarGame = i2.getStringExtra("checkStartGame");
-        Intent i = new Intent(this,HightScoreActivity.class);
-        i.putExtra("Score_user",""+(currentQuestion-1));
-        i.putExtra("username_user",username_user);
-       // i.putExtra("check",true);
-        startActivity(i);
-    }
+//    private void sendScoreUser() {
+//        Intent i2 = getIntent();
+//        String username_user = i2.getStringExtra("username_user");
+//        String checkStarGame = i2.getStringExtra("checkStartGame");
+//        Intent i = new Intent(this,HightScoreActivity.class);
+//        i.putExtra("Score_user",""+(currentQuestion-1));
+//        i.putExtra("username_user",username_user);
+//       // i.putExtra("check",true);
+//        startActivity(i);
+//    }
 
     //show đáp án đúng khi chọn sai
     private void showAnswerCorrect() {
@@ -154,15 +154,15 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent i2 = getIntent();
-                String username_user = i2.getStringExtra("username_user");
-                String checkStarGame = i2.getStringExtra("checkStartGame");
+//                Intent i2 = getIntent();
+//                String username_user = i2.getStringExtra("username_user");
+//                String checkStarGame = i2.getStringExtra("checkStartGame");
                 Intent intent = new Intent(Giaodien_QuestionActivity.this,HightScoreActivity.class);
                 dialog.dismiss();
                 //sendScoreUser();
                 //Intent i = new Intent(this,HightScoreActivity.class);
-                intent.putExtra("Score_user",""+(currentQuestion-1));
-                intent.putExtra("username_user",username_user);
+//                intent.putExtra("Score_user",""+(currentQuestion-1));
+//                intent.putExtra("username_user",username_user);
                 // i.putExtra("check",true);
                 //startActivity(i);
                 startActivity(intent);

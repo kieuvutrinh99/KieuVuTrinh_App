@@ -37,12 +37,12 @@ public class HightScoreActivity extends AppCompatActivity implements View.OnClic
     }
 
     private List<Score_User> getList_ScoreUser() {
-        Intent i = getIntent();
-        String username_user = i.getStringExtra("username_user");
-        String score_user = i.getStringExtra("Score_user");
+//        Intent i = getIntent();
+//        String username_user = i.getStringExtra("username_user");
+//        String score_user = i.getStringExtra("Score_user");
         List<Score_User> list_score_users = new ArrayList<>();
-        list_score_users.add(new Score_User(username_user,Integer.parseInt(score_user)));
-        list_score_users.add(new Score_User("Kiều Trình",10));
+        //list_score_users.add(new Score_User(username_user,Integer.parseInt(score_user)));
+        //list_score_users.add(new Score_User("Kiều Trình",10));
         return list_score_users;
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title=""
+        android:id="@+id/buoc1"
+        android:icon="@drawable/ic_buoc1"
+        />
+    <item android:title=""
+        android:id="@+id/buoc2"
+        android:icon="@drawable/ic_buoc2"
+        />
+    <item android:title=""
+        android:id="@+id/buoc3"
+        android:icon="@drawable/ic_buoc3"
+        />
+    <item android:title=""
+        android:id="@+id/buoc4"
+        android:icon="@drawable/ic_buoc4"
+        />
+    <item android:title=""
+        android:id="@+id/buoc5"
+        android:icon="@drawable/ic_buoc5"
+        />
+
+</menu>

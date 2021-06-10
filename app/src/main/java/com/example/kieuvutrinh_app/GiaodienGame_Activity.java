@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class GiaodienGame_Activity extends AppCompatActivity implements View.OnClickListener {
-    private Button btn_lichsu,btn_dichbenh,btn_vanhoa;
+    private Button btn_lichsu,btn_dichbenh,btn_vanhoa,btn_trangchu;
     private String username_user;
     //private boolean checkStarGame;
     @Override
@@ -22,12 +22,13 @@ public class GiaodienGame_Activity extends AppCompatActivity implements View.OnC
         btn_lichsu = findViewById(R.id.btn_lichsu);
         btn_dichbenh = findViewById(R.id.btn_dichbenh);
         btn_vanhoa = findViewById(R.id.btn_vanhoa);
+        btn_trangchu = findViewById(R.id.back_home);
         btn_lichsu.setOnClickListener(this);//cai man hinh nay la activity nao,màn hfinh đang mở đấy
         btn_dichbenh.setOnClickListener(this);
         btn_vanhoa.setOnClickListener(this);
-        Intent i = getIntent();
-        username_user = i.getStringExtra("username_user");
-        //Intent i2 =
+        btn_trangchu.setOnClickListener(this);
+//        Intent i = getIntent();
+//        username_user = i.getStringExtra("username_user");
     }
 
     @Override
@@ -38,20 +39,23 @@ public class GiaodienGame_Activity extends AppCompatActivity implements View.OnC
         switch (v.getId()){
             case R.id.btn_lichsu:
                 intent.putExtra("category","1");
-                intent.putExtra("checkStarGame","true");
+                //intent.putExtra("checkStarGame","true");
                 startActivity(intent);
                 break;
             case R.id.btn_vanhoa:
                 intent.putExtra("category","2");
-                intent.putExtra("checkStarGame","true");
+               // intent.putExtra("checkStarGame","true");
                 startActivity(intent);
                 break;
             case R.id.btn_dichbenh:
                 intent.putExtra("category","3");
-                intent.putExtra("checkStarGame","true");
+              //  intent.putExtra("checkStarGame","true");
                 startActivity(intent);
                 break;
-
+            case R.id.back_home:
+                Intent intent1 = new Intent(this,MainActivity.class);
+                startActivity(intent1);
+                break;
         }
     }
 }
