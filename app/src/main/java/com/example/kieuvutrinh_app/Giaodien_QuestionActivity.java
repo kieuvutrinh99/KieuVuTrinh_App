@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import com.example.kieuvutrinh_app.service.Dataservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,10 +32,13 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     private TextView tv_question_two;
     private TextView tv_question_three;
     private TextView tv_question_four;
+    private TextView tv_time;
     private String category;
     private int currentQuestion = 0;
+    private CountDownTimer countDownTimer;
+    private long time = 30000;
     List<Answer> listAnswer ;
-    private int i = -1;
+    //private int i = -1;
     List<Question> listQuestion = null;
     Dataservice dataservice = APIService.getService();
 
@@ -48,7 +54,7 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         tv_question_three.setOnClickListener(this);
         tv_question_four.setOnClickListener(this);
     }
-
+//cái chỗ đặt hàm counttime dâu// cái chỗ  chọn đáp án ở đâu v
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -79,6 +85,8 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
                 //textView.setBackgroundResource(R.drawable.bg_orange_corner_30);
                 if(listAnswer.get(index).getKiemtra().equals("true")){
                     textView.setBackgroundResource(R.drawable.bg_green_corner_30);
+                    //trả lời đúng dừng countdown
+                    countDownTimer.cancel();
                     nextQuestion();
                 }
                 else{
@@ -89,7 +97,7 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
             }
         },1000);
     }
-
+    //show đáp án đúng khi chọn sai
     private void showAnswerCorrect() {
         if(listAnswer.get(0).getKiemtra().equals("true")){
             tv_question_one.setBackgroundResource(R.drawable.bg_green_corner_30);
@@ -104,33 +112,34 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
             tv_question_four.setBackgroundResource(R.drawable.bg_green_corner_30);
         }
     }
-
+        //game kết thúc
     private void gameOver() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                showDialog("Game over\nĐiểm của bạn là "+(currentQuestion-1));
+                showDialog("Game over\nĐiểm của bạn là: "+(currentQuestion-1));
             }
         },1000);
     }
+    // trả lời được hết bộ câu hỏi
     private void HoanThanhGame(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                showDialog("CONGRATULATIONS\nBạn đã hoàn thành bộ câu hỏi\nĐiểm của bạn là "+currentQuestion);
+                showDialog("CONGRATULATIONS\nBạn đã hoàn thành bộ câu hỏi\nĐiểm của bạn là: "+currentQuestion);
             }
         },1000);
     }
-
+    //show message Dialog
     private void showDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setCancelable(false);
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Giaodien_QuestionActivity.this,GiaodienGame_Activity.class);
+                Intent intent = new Intent(Giaodien_QuestionActivity.this,MainActivity.class);
                 dialog.dismiss();
                 startActivity(intent);
             }
@@ -141,17 +150,20 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     }
 
     private void nextQuestion(){
-        if (i < 9 ) { // i < max cau hoi thi no nhay tiep , luc nao them du 50 cau hoi thi i < 49
+        if (currentQuestion < listQuestion.size() ) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     getDataAnswer();
                 }
             }, 1000);
-        }else{
+
+        }
+        else{
             HoanThanhGame();
         }
     }
+
     private void Init() {
         tv_content_question = findViewById(R.id.tv_conten_question);
         tv_question = findViewById(R.id.tv_question);
@@ -160,6 +172,7 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         tv_question_three = findViewById(R.id.tv_question_three);
         tv_question_four = findViewById(R.id.tv_question_four);
         tv_score_question = findViewById(R.id.tv_score_question);
+        tv_time = findViewById(R.id.tv_time_question);
     }
 
     private void getDataListQuestion() {
@@ -171,8 +184,6 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
                     // nếu như có data về thì sẽ nhảy vào method  này
                     listQuestion = response.body();
                     getDataAnswer();
-                    // ơ đây phải có cái apdapter , thôi t cứ sét vào vây
-//                    tv_content_question.setText(listQuestion.get(i).getText_question());
                 }
 
                 @Override
@@ -184,17 +195,19 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     }
 
     private void getDataAnswer(){
-        currentQuestion++;
-        tv_question.setText("Question "+currentQuestion);
-        tv_score_question.setText("Score: "+(currentQuestion-1));
-        i++;
+        //currentQuestion++;
+        startCountDownTimer();
+        tv_question.setText("Question "+(currentQuestion+1));
+        tv_score_question.setText("Score: "+(currentQuestion));
+        //i++;
         tv_question_one.setBackgroundResource(R.drawable.bg_blue_corner_30);
         tv_question_two.setBackgroundResource(R.drawable.bg_blue_corner_30);
         tv_question_three.setBackgroundResource(R.drawable.bg_blue_corner_30);
         tv_question_four.setBackgroundResource(R.drawable.bg_blue_corner_30);
-        tv_content_question.setText(listQuestion.get(i).getText_question());
+        tv_content_question.setText(listQuestion.get(currentQuestion).getText_question());
         //System.out.println(listQuestion.size());
-        Call<List<Answer>> callback = dataservice.GetDataAnswer(listQuestion.get(i).getId_answer());
+        Call<List<Answer>> callback = dataservice.GetDataAnswer(listQuestion.get(currentQuestion).getId_answer());
+        currentQuestion++;
         callback.enqueue(new Callback<List<Answer>>() {
             @Override
             public void onResponse(Call<List<Answer>> call, Response<List<Answer>> response) {
@@ -207,10 +220,26 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
 
             @Override
             public void onFailure(Call<List<Answer>> call, Throwable t) {
-
             }
+
         });
     }
-
-
+    //hàm time đếm ngược trong câu hỏi
+    private void startCountDownTimer() {
+        countDownTimer = new CountDownTimer(time, 1000) {
+            //chạy đến khi còn time
+            public void onTick(long millisUntilFinished) {
+                tv_time.setText("THỜI GIAN: " + millisUntilFinished / 1000);
+                if(millisUntilFinished<5000){
+                    tv_time.setTextColor(Color.RED);
+                }
+                else tv_time.setTextColor(Color.BLACK);
+            }
+            //hết time nhảy vào onFinish
+            public void onFinish() {
+                showAnswerCorrect();
+                gameOver();
+            }
+        }.start();
+    }
 }

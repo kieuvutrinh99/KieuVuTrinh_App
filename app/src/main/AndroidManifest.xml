@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KieuVuTrinh_App"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HightScoreActivity"></activity>
-        <activity android:name=".HelpGameActivity" />
-        <activity android:name=".Giaodien_QuestionActivity" />
-        <activity android:name=".GiaodienGame_Activity" />
-        <activity android:name=".RegistryActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HightScoreActivity"></activity>
+        <activity android:name=".HelpGameActivity" />
+        <activity android:name=".Giaodien_QuestionActivity" />
+        <activity android:name=".GiaodienGame_Activity" />
+        <activity android:name=".RegistryActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

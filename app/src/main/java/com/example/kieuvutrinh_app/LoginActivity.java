@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     private void Init() {
         btn_Dangnhap = findViewById(R.id.btn_Dangnhap);
         btn_Dangki = findViewById(R.id.btn_dangki);

@@ -2,15 +2,39 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/anhnenyte"
     xmlns:android="http://schemas.android.com/apk/res/android">
     
-    <TextView
-        android:id="@+id/tv_score_question"
-        android:text="Điểm:1"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="10dp"
+            android:background="@drawable/bg_while_corner_30"
+            android:id="@+id/tv_score_question"
+            android:text="Điểm:1"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold|italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:padding="10dp"
+            android:background="@drawable/bg_while_corner_30"
+            android:layout_marginRight="20dp"
+            android:id="@+id/tv_time_question"
+            android:layout_alignParentRight="true"
+            android:text="Thời gian:30s"
+            android:textSize="20dp"
+            android:layout_gravity=""
+            android:textStyle="bold|italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +68,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
             />
     </RelativeLayout>
     <TextView
@@ -57,7 +82,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        />
     <TextView
         android:id="@+id/tv_question_two"
         android:layout_width="match_parent"

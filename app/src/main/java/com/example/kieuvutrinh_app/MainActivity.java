@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_StartGame;
     private Button btn_HelpGame;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_huongdan:
                 break;
             case R.id.btn_diemcao:
+                Intent intent2 = new Intent(MainActivity.this, HightScoreActivity.class);
+                startActivity(intent2);
                 break;
         }
     }
