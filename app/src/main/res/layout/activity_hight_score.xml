@@ -17,8 +17,15 @@
             android:text="Bảng xếp hạng điểm cao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
             android:layout_below="@+id/tv_diemcao"
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test1"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contrais"
+            android:layout_below="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

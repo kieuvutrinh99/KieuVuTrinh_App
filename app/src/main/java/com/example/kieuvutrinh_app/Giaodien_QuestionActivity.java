@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -41,12 +42,14 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     //private int i = -1;
     List<Question> listQuestion = null;
     Dataservice dataservice = APIService.getService();
+    private SharedPreferences sp ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giaodien__question);
         category = getIntent().getStringExtra("category");
+        sp = getApplicationContext().getSharedPreferences("dataUser", this.MODE_PRIVATE);
         Init();
         getDataListQuestion();
         tv_question_one.setOnClickListener(this);
@@ -88,28 +91,38 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
                     textView.setBackgroundResource(R.drawable.bg_green_corner_30);
                     //trả lời đúng dừng countdown
                     countDownTimer.cancel();
-                    nextQuestion();
+                    nextQuestion();//đúng// nếu mà sau thì vẫn cứ trả lời tiếp đúng dừng luôn, thế phải chạy lại từ đầu à
+
                 }
                 else{
                     textView.setBackgroundResource(R.drawable.bg_red_corner_30);
-                    //System.out.println(currentQuestion);
+                    //System.out.println(currentQuestion);  .............
+
                     showAnswerCorrect();
-                    gameOver();
+                    gameOver();//sai
+                    postScore();
                 }
             }
         },1000);
     }
 
-//    private void sendScoreUser() {
-//        Intent i2 = getIntent();
-//        String username_user = i2.getStringExtra("username_user");
-//        String checkStarGame = i2.getStringExtra("checkStartGame");
-//        Intent i = new Intent(this,HightScoreActivity.class);
-//        i.putExtra("Score_user",""+(currentQuestion-1));
-//        i.putExtra("username_user",username_user);
-//       // i.putExtra("check",true);
-//        startActivity(i);
-//    }
+    private void postScore() {
+        Call<String> callback = dataservice.UpdateScore(sp.getString("username",""),currentQuestion - 1); // gọi api truyền các giá trị tương ứng vào là username với score
+        callback.enqueue(new Callback<String>() {         // dòng trên đầu này là lấy ra cái username theo cái tên username vừa nãy mình lưu
+            @Override                                    //nếu như giá trị lấy ra bằng null thì nó sẽ lấy giá trị mặc định để thay thế (defaultValue)
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()){
+                    String str = response.body();
+                    System.out.println(str);
+                }
+            }//có sao đâu,vuwafn ãy đ dc//tes cái post man kiểu gi đc r đấy chắc nãy m test api lỗi hay gì dó thôiok
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
 
     //show đáp án đúng khi chọn sai
     private void showAnswerCorrect() {
@@ -134,13 +147,14 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
                 showDialog("Game over\nĐiểm của bạn là: "+(currentQuestion-1));
             }
         },1000);
-    }
+    }// diểm đâu
     // trả lời được hết bộ câu hỏi
     private void HoanThanhGame(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 showDialog("CONGRATULATIONS\nBạn đã hoàn thành bộ câu hỏi\nĐiểm của bạn là: "+(currentQuestion-1));
+                postScore();
                 //sendScoreUser();
             }
         },1000);
@@ -154,17 +168,8 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                Intent i2 = getIntent();
-//                String username_user = i2.getStringExtra("username_user");
-//                String checkStarGame = i2.getStringExtra("checkStartGame");
                 Intent intent = new Intent(Giaodien_QuestionActivity.this,HightScoreActivity.class);
                 dialog.dismiss();
-                //sendScoreUser();
-                //Intent i = new Intent(this,HightScoreActivity.class);
-//                intent.putExtra("Score_user",""+(currentQuestion-1));
-//                intent.putExtra("username_user",username_user);
-                // i.putExtra("check",true);
-                //startActivity(i);
                 startActivity(intent);
             }
 
@@ -174,17 +179,17 @@ public class Giaodien_QuestionActivity extends AppCompatActivity implements View
     }
 
     private void nextQuestion(){
-        if (currentQuestion < listQuestion.size() ) {
+        if (currentQuestion < listQuestion.size() ) { // nhỏ hơn số câu hỏi
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     getDataAnswer();
                 }
-            }, 1000);
+            }, 1000);//điểm là cái current Question àuh
 
         }
         else{
-            currentQuestion++;
+            currentQuestion++;//khi nào thì nó dừng lại , câu hỏi ấy
             HoanThanhGame();
         }
     }

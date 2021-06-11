@@ -43,12 +43,13 @@ public class Score_UserAdapter extends RecyclerView.Adapter<Score_UserAdapter.Sc
     @Override
     public void onBindViewHolder(@NonNull Score_UserViewHolder holder, int position) {
         Score_User score_user = score_userList.get(position);
-        holder.tv_username_user.setText(score_user.getUser_name());
+        holder.tv_username_user.setText(score_user.getUsername());
         holder.tv_score_user.setText(String.valueOf(score_user.getScore()));
     }
 
     @Override
     public int getItemCount() {
+        if(score_userList == null) return 0;
         return score_userList.size();
     }
 

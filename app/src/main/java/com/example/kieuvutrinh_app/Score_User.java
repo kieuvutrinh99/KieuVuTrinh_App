@@ -1,29 +1,49 @@
 package com.example.kieuvutrinh_app;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class Score_User implements Serializable {
-    private String user_name;
-    private int Score;
+public class Score_User {
 
-    public Score_User(String user_name, int score) {
-        this.user_name = user_name;
-        Score = score;
+    @SerializedName("ID")
+    @Expose
+    private String id;
+    @SerializedName("Username")
+    @Expose
+    private String username;
+    @SerializedName("Score")
+    @Expose
+    private String score;
+
+    public Score_User(String username, String score) {
+        this.username = username;
+        this.score = score;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getId() {
+        return id;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getScore() {
-        return Score;
+    public String getUsername() {
+        return username;
     }
 
-    public void setScore(int score) {
-        Score = score;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
 }
