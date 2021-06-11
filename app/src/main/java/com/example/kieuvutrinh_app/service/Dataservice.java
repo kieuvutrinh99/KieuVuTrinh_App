@@ -14,8 +14,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface Dataservice {
-//    @GET("getdata.php")
-//    Call<List<Question>> GetDataUser();
 
     @GET("getdataa.php")
     Call<List<Question>> GetDataCategory(@Query("idTheLoai") String id);
@@ -25,8 +23,7 @@ public interface Dataservice {
 
     @FormUrlEncoded
     @POST("update_score.php")
-    Call<String> UpdateScore(@Field("username") String username, // lưu ý khi gửi data lên đặc biệt là những thông tin quan trọng cần bảo mật thì
-                                                                    // sử dụng method Post còn nếu muốn lấy data về thì sử dụng method Get vì tốc độ của Get nhanh hơn
+    Call<String> UpdateScore(@Field("username") String username,
                                @Field("score") int score
                                ) ;
     @GET("getdataScore.php")

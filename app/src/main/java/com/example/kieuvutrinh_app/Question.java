@@ -3,7 +3,7 @@ package com.example.kieuvutrinh_app;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Question { // class nayf doi thanh answer , sao k ddoir dc v
+public class Question {
 
     @SerializedName("Id")
     @Expose

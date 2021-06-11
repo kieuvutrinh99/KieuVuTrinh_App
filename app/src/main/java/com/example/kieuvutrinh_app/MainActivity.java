@@ -1,15 +1,22 @@
 package com.example.kieuvutrinh_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.content.Context;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int NOTIFICATION_ID = 1;
     private Button btn_StartGame;
     private Button btn_HelpGame;
     private Button btn_HighScore;
@@ -55,4 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 }

@@ -29,14 +29,14 @@ public class HightScoreActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView recyclerView_highScore;
     private Score_UserAdapter score_userAdapter;
     private Button btn_quaylai;
-    private TextView test;
+    //private TextView test;
     List<Score_User> list ;
     //private List<Score_User> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hight_score);
-        test = findViewById(R.id.test);
+        //test = findViewById(R.id.test);
         btn_quaylai = findViewById(R.id.btn_quaylai);
         btn_quaylai.setOnClickListener(this);
         recyclerView_highScore = findViewById(R.id.rcv_bangHighScore);
@@ -51,17 +51,15 @@ public class HightScoreActivity extends AppCompatActivity implements View.OnClic
 
         private void getData() {
             Dataservice dataservice = APIService.getService();
-            Call<List<Score_User>> callback = dataservice.getDataScore();// null hay k null k phải là vấn đề  thế nhá okk
+            Call<List<Score_User>> callback = dataservice.getDataScore();
             callback.enqueue(new Callback<List<Score_User>>() {
                 @Override
                 public void onResponse(Call<List<Score_User>> call, Response<List<Score_User>> response) {
                     // nếu như có data về thì sẽ nhảy vào method  này
-                     list = response.body();// m để ntn thì mđặt biến toàn cục ở ngoài có ý nghĩa gì , vì cái list này là cái list khác so với cai list ở ngoài r
-                    //list.get(0).g
+                     list = response.body();
                     System.out.println(list.size());
-                    score_userAdapter.setData(list);//dc chưa//sao phải xét nul nhỉ ảo vl, không phải là set null hay không mà
-                    //t đặt toàn cục rồi set đ lên, m khởi tạo  đối tượng hỏi nó chả k lên vuưừa Dnãy t ms thấy m còn để kiểu dữ liệu trc cái list/
-                }// t đặt = rỗng rồi,nhưng k đc,rồi mowis khưởi tạo thử,để null mới chạy đc
+                    score_userAdapter.setData(list);
+                }
 
                 @Override
                 public void onFailure(Call<List<Score_User>> call, Throwable t) {

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">KieuVuTrinh_App</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="channel_name">Gameplay one</string>
+    <string name="channel_description">Vô game thôi nào</string>
 </resources>
